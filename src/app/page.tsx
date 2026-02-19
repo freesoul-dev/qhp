@@ -57,7 +57,7 @@ export default function Home() {
         </p>
         <br />
         <p className="text-slate-300">
-          Call us at <a href="tel:412-999-9999">412-999-9999</a>
+          Call us at <a href="tel:412-641-0642">+1 (412) 641-0642</a>
         </p>
         <p className="text-slate-300">
           Or email us at <a href="mailto:admin@qualityhome.co">admin@qualityhome.co</a>
