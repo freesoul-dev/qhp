@@ -3,7 +3,11 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
+<<<<<<< HEAD
 const videos = ["https://990-agency.b-cdn.net/work_1.mp4", "https://990-agency.b-cdn.net/work_2.mp4"];
+=======
+const videos = ["/videos/work_1.mp4", "/videos/work_2.mp4"];
+>>>>>>> 3f0a449 (1st)
 
 export default function Home() {
   const [videoSrc, setVideoSrc] = useState<string | null>(null);
