@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-const videos = ["https://990-agency.b-cdn.net/work_1.mp4", "https://990-agency.b-cdn.net/work_2.mp4"];
+const videos = ["/.videos/work_1.mov", "/.videos/work_2.mov"];
 
 export default function Home() {
   const [videoSrc, setVideoSrc] = useState<string | null>(null);
@@ -40,8 +40,8 @@ export default function Home() {
         <Image
           src="/logo.png"
           alt="Quality Home Protection"
-          width={260}
-          height={260}
+          width={300}
+          height={300}
           priority
           className="mb-8"
         />
