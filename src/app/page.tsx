@@ -1,25 +1,25 @@
-"use client";
+// "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 
-const videos = ["/.videos/work_1.mov", "/.videos/work_2.mov"];
+// const videos = ["/.videos/work_1.mov", "/.videos/work_2.mov"];
 
 export default function Home() {
-  const [videoSrc, setVideoSrc] = useState<string | null>(null);
+  // const [videoSrc, setVideoSrc] = useState<string | null>(null);
 
-  useEffect(() => {
-    const key = "qhp_video_index";
-    const stored = sessionStorage.getItem(key);
-    const index = stored ? (parseInt(stored, 10) + 1) % videos.length : 0;
-    sessionStorage.setItem(key, String(index));
-    setVideoSrc(videos[index]);
-  }, []);
+  // useEffect(() => {
+  //   const key = "qhp_video_index";
+  //   const stored = sessionStorage.getItem(key);
+  //   const index = stored ? (parseInt(stored, 10) + 1) % videos.length : 0;
+  //   sessionStorage.setItem(key, String(index));
+  //   setVideoSrc(videos[index]);
+  // }, []);
 
   return (
     <div className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 text-center">
       {/* Background video */}
-      {videoSrc && (
+      {/* {videoSrc && (
         <video
           key={videoSrc}
           autoPlay
@@ -30,7 +30,16 @@ export default function Home() {
         >
           <source src={videoSrc} type="video/mp4" />
         </video>
-      )}
+      )} */}
+
+      {/* Background image (temporary until video CDN is set up) */}
+      <Image
+        src="/background.png"
+        alt=""
+        fill
+        priority
+        className="object-cover"
+      />
 
       {/* Dark overlay */}
       <div className="absolute inset-0 bg-black/60" />
