@@ -10,7 +10,7 @@ export default function ServiceCard({
   description,
 }: ServiceCardProps) {
   return (
-    <div className="flex flex-col overflow-hidden rounded-lg bg-slate-800">
+    <div className="flex flex-col overflow-hidden rounded-lg border border-slate-700 bg-slate-900/80 backdrop-blur">
       <div className="p-4">
         <ImageCarousel count={4} label={title} />
       </div>

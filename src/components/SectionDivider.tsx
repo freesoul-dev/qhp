@@ -4,6 +4,7 @@ interface SectionDividerProps {
   heading?: string;
   subtitle?: string;
   cta?: string;
+  href?: string;
   compact?: boolean;
 }
 
@@ -11,6 +12,7 @@ export default function SectionDivider({
   heading,
   subtitle,
   cta,
+  href = "/estimate",
   compact = false,
 }: SectionDividerProps) {
   return (
@@ -34,7 +36,7 @@ export default function SectionDivider({
         )}
         {cta && (
           <Link
-            href="/estimate"
+            href={href}
             className="inline-block rounded-md bg-amber-500 px-8 py-3 text-sm font-semibold text-slate-900 transition-colors hover:bg-amber-400"
           >
             {cta}

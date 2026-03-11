@@ -3,11 +3,12 @@ import SectionDivider from "@/components/SectionDivider";
 import CompanyInfoBlock from "@/components/CompanyInfoBlock";
 import CaseStudyCarousel from "@/components/CaseStudyCarousel";
 import AutoScrollGallery from "@/components/AutoScrollGallery";
+import ScrollReveal from "@/components/ScrollReveal";
 
 export const metadata: Metadata = {
   title: "Portfolio | Quality Home Protection",
   description:
-    "See how Quality Home Protection approaches real projects — from problem to solution. Browse our case studies and past work gallery.",
+    "See how Quality Home Protection approaches real projects from problem to solution. Browse our case studies and past work gallery.",
 };
 
 const problemImages = ["Before — Overview", "Gutter detail", "Roof damage"];
@@ -19,30 +20,36 @@ export default function PortfolioPage() {
     <>
       {/* Header */}
       <section className="w-full bg-slate-900 px-6 pt-32 pb-16">
-        <div className="mx-auto max-w-5xl">
-          <h1 className="mb-4 text-4xl font-bold text-white">Portfolio</h1>
-          <p className="max-w-2xl leading-relaxed text-slate-300">
-            Every project tells a story. We work closely with our clients to
-            understand the problem, develop a plan, and deliver a lasting
-            solution. Below is a look at how we approach our work — from
-            initial assessment to finished result.
-          </p>
+        <div className="relative z-10 mx-auto max-w-5xl">
+          <ScrollReveal>
+            <h1 className="mb-4 text-4xl font-bold text-white">Portfolio</h1>
+          </ScrollReveal>
+          <ScrollReveal delay={100}>
+            <p className="max-w-2xl leading-relaxed text-slate-300">
+              Every project tells a story. We work closely with our clients to
+              understand the problem, develop a plan, and deliver a lasting
+              solution. Below is a look at how we approach our work — from
+              initial assessment to finished result.
+            </p>
+          </ScrollReveal>
         </div>
       </section>
 
       {/* Case Study — Porch Roof Modernization */}
       <section className="w-full bg-slate-900 px-6 pb-20">
         <div className="mx-auto max-w-5xl">
-          <h2 className="mb-2 text-2xl font-bold text-white">
-            Porch Roof Modernization with Box Gutter Bridging
-          </h2>
-          <p className="mb-8 text-sm font-medium uppercase tracking-wider text-amber-400">
-            Case Study — Pittsburgh, PA
-          </p>
+          <ScrollReveal>
+            <h2 className="mb-2 text-2xl font-bold text-white">
+              Porch Roof Modernization with Box Gutter Bridging
+            </h2>
+            <p className="mb-8 text-sm font-medium uppercase tracking-wider text-amber-400">
+              Case Study — Pittsburgh, PA
+            </p>
+          </ScrollReveal>
 
           {/* The Problem */}
           <div className="mb-12 grid gap-8 md:grid-cols-2">
-            <div>
+            <ScrollReveal direction="left">
               <h3 className="mb-3 text-lg font-semibold text-white">
                 The Problem
               </h3>
@@ -54,13 +61,15 @@ export default function PortfolioPage() {
                 existing gutter bridging was no longer directing water away from
                 the foundation effectively.
               </p>
-            </div>
-            <CaseStudyCarousel items={problemImages} />
+            </ScrollReveal>
+            <ScrollReveal direction="right" delay={150}>
+              <CaseStudyCarousel items={problemImages} />
+            </ScrollReveal>
           </div>
 
           {/* The Approach */}
           <div className="mb-12 grid gap-8 md:grid-cols-2">
-            <div className="md:order-2">
+            <ScrollReveal direction="right" className="md:order-2">
               <h3 className="mb-3 text-lg font-semibold text-white">
                 The Approach
               </h3>
@@ -89,15 +98,15 @@ export default function PortfolioPage() {
                   Installed new architectural shingles with ice &amp; water shield underlayment
                 </li>
               </ul>
-            </div>
-            <div className="md:order-1">
+            </ScrollReveal>
+            <ScrollReveal direction="left" delay={150} className="md:order-1">
               <CaseStudyCarousel items={approachImages} />
-            </div>
+            </ScrollReveal>
           </div>
 
           {/* The Result */}
           <div className="grid gap-8 md:grid-cols-2">
-            <div>
+            <ScrollReveal direction="left">
               <h3 className="mb-3 text-lg font-semibold text-white">
                 The Result
               </h3>
@@ -109,8 +118,10 @@ export default function PortfolioPage() {
                 a porch roof that matches the rest of the house with decades of
                 protection ahead.
               </p>
-            </div>
-            <CaseStudyCarousel items={resultImages} />
+            </ScrollReveal>
+            <ScrollReveal direction="right" delay={150}>
+              <CaseStudyCarousel items={resultImages} />
+            </ScrollReveal>
           </div>
         </div>
       </section>
@@ -118,12 +129,16 @@ export default function PortfolioPage() {
       {/* Past Work Gallery */}
       <section className="w-full bg-slate-800 px-6 py-16">
         <div className="mx-auto max-w-5xl">
-          <h2 className="mb-2 text-2xl font-bold text-white">Past Work</h2>
-          <p className="mb-8 text-slate-400">
-            A collection of projects across roofing, gutters, storm restoration,
-            decks, and more.
-          </p>
-          <AutoScrollGallery count={12} />
+          <ScrollReveal>
+            <h2 className="mb-2 text-2xl font-bold text-white">Past Work</h2>
+            <p className="mb-8 text-slate-400">
+              A collection of projects across roofing, gutters, storm restoration,
+              decks, and more.
+            </p>
+          </ScrollReveal>
+          <ScrollReveal delay={200}>
+            <AutoScrollGallery count={12} />
+          </ScrollReveal>
         </div>
       </section>
 

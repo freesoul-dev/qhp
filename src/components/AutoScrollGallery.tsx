@@ -53,7 +53,7 @@ export default function AutoScrollGallery({
       </div>
 
       {/* Thumbnail strip */}
-      <div className="flex gap-2 overflow-x-auto pb-1">
+      <div className="flex gap-2 overflow-visible ">
         {Array.from({ length: count }, (_, i) => (
           <button
             key={i}

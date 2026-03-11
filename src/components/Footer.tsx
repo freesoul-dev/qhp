@@ -51,8 +51,19 @@ export default function Footer() {
       </div>
 
       <div className="mx-auto mt-10 max-w-7xl border-t border-slate-800 pt-6 text-center text-xs">
-        &copy; {new Date().getFullYear()} Quality Home Protection LLC. All
-        rights reserved.
+        <p className="mb-4">
+          &copy; {new Date().getFullYear()} Quality Home Protection LLC. All
+          rights reserved.
+        </p>
+        <p className="mx-auto max-w-3xl leading-relaxed text-slate-500">
+          The information provided on this website is for general informational
+          purposes only. All services are subject to availability and scheduling.
+          Estimates are provided based on initial assessments and may change upon
+          full inspection. Quality Home Protection LLC is licensed and insured in
+          the state of Pennsylvania. By using this website or our services, you
+          agree to our terms of service. For questions or concerns, please contact
+          us directly.
+        </p>
       </div>
     </footer>
   );

@@ -3,20 +3,37 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useRef, useEffect } from "react";
+import { useRouter, usePathname } from "next/navigation";
 
 const offerings = [
-  { label: "Roofing Services", anchor: "/#roofing" },
-  { label: "Storm Restoration", anchor: "/#storm-restoration" },
-  { label: "Box Gutters", anchor: "/#box-gutters" },
-  { label: "Decks", anchor: "/#decks" },
-  { label: "General Contracting", anchor: "/#general-contracting" },
-  { label: "Landscaping", anchor: "/#landscaping" },
+  { label: "Roofing Services", anchor: "/#roofing", id: "roofing" },
+  { label: "Storm Restoration", anchor: "/#storm-restoration", id: "storm-restoration" },
+  { label: "Box Gutters", anchor: "/#box-gutters", id: "box-gutters" },
+  { label: "Decks", anchor: "/#decks", id: "decks" },
+  { label: "General Contracting", anchor: "/#general-contracting", id: "general-contracting" },
+  { label: "Landscaping", anchor: "/#landscaping", id: "landscaping" },
 ];
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const scrollToSection = (id: string) => {
+    setMenuOpen(false);
+    setDropdownOpen(false);
+    
+    if (pathname === "/") {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      router.push(`/#${id}`);
+    }
+  };
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -32,7 +49,7 @@ export default function Navbar() {
     <nav className="absolute top-0 left-0 z-50 w-full">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
         <Link href="/" className="flex items-center gap-3">
-          <Image src="/logo.png" alt="Quality Home Protection" width={48} height={48} />
+          <Image src="/logo.png" alt="Quality Home Protection" width={100} height={100} />
           <span className="text-lg font-bold tracking-tight text-white">
             Quality Home Protection
           </span>
@@ -67,14 +84,13 @@ export default function Navbar() {
             {dropdownOpen && (
               <div className="absolute left-0 top-full mt-2 w-52 rounded-lg border border-slate-700 bg-slate-900/95 py-2 shadow-xl backdrop-blur">
                 {offerings.map((item) => (
-                  <Link
-                    key={item.anchor}
-                    href={item.anchor}
-                    onClick={() => setDropdownOpen(false)}
-                    className="block px-4 py-2 text-sm text-slate-300 transition-colors hover:bg-slate-800 hover:text-amber-400"
+                  <button
+                    key={item.id}
+                    onClick={() => scrollToSection(item.id)}
+                    className="block w-full px-4 py-2 text-left text-sm text-slate-300 transition-colors hover:bg-slate-800 hover:text-amber-400"
                   >
                     {item.label}
-                  </Link>
+                  </button>
                 ))}
               </div>
             )}
@@ -135,14 +151,13 @@ export default function Navbar() {
               </span>
               <div className="flex flex-col gap-2 pl-2">
                 {offerings.map((item) => (
-                  <Link
-                    key={item.anchor}
-                    href={item.anchor}
-                    onClick={() => setMenuOpen(false)}
-                    className="text-sm text-slate-300 transition-colors hover:text-amber-400"
+                  <button
+                    key={item.id}
+                    onClick={() => scrollToSection(item.id)}
+                    className="text-left text-sm text-slate-300 transition-colors hover:text-amber-400"
                   >
                     {item.label}
-                  </Link>
+                  </button>
                 ))}
               </div>
             </div>

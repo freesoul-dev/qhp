@@ -22,7 +22,7 @@ export default function PrimaryServiceSection({
   const active = subOfferings[activeIndex];
 
   return (
-    <div className="overflow-hidden rounded-lg bg-slate-800">
+    <div className="overflow-hidden rounded-lg border border-slate-700 bg-slate-900/80 backdrop-blur">
       <div
         className={`grid gap-6 p-6 md:grid-cols-2 ${reverse ? "md:direction-rtl" : ""}`}
       >

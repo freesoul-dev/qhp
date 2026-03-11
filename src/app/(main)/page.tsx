@@ -5,6 +5,8 @@ import SectionDivider from "@/components/SectionDivider";
 import CompanyInfoBlock from "@/components/CompanyInfoBlock";
 import ContactForm from "@/components/ContactForm";
 import Reviews from "@/components/Reviews";
+import ScrollReveal from "@/components/ScrollReveal";
+import ServiceAccordion from "@/components/ServiceAccordion";
 
 const primaryServices = [
   {
@@ -140,73 +142,112 @@ export default function HomePage() {
         <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-2 lg:min-h-[70vh]">
           {/* Left — Branding */}
           <div>
-            <Image
-              src="/logo.png"
-              alt="Quality Home Protection"
-              width={140}
-              height={140}
-              priority
-              className="mb-6"
-            />
-            <h1 className="mb-3 text-4xl font-bold tracking-tight text-white sm:text-5xl">
-              Quality Home Protection
-            </h1>
-            <p className="mb-2 text-xl font-medium text-amber-400">
-              Built to Last. Backed by Trust.
-            </p>
-            <p className="max-w-md text-slate-300">
-              Pittsburgh&apos;s trusted experts in roofing, storm restoration,
-              gutters, and home improvement. We protect what matters most — your
-              home and your family.
-            </p>
+            {/* <ScrollReveal>
+              <Image
+                src="/logo.png"
+                alt="Quality Home Protection"
+                width={300}
+                height={300}
+                priority
+                className="mb-6"
+              />
+            </ScrollReveal> */}
+            <ScrollReveal delay={100}>
+              <h1 className="mb-3 text-4xl font-bold tracking-tight text-white sm:text-5xl">
+                Quality Home Protection
+              </h1>
+            </ScrollReveal>
+            <ScrollReveal delay={200}>
+              <p className="mb-2 text-xl font-medium text-amber-400">
+                Built to Last. Backed by Trust.
+              </p>
+            </ScrollReveal>
+            <ScrollReveal delay={300}>
+              <p className="max-w-md text-slate-300">
+                Pittsburgh&apos;s trusted experts in roofing, storm restoration,
+                gutters, and home improvement. We protect what matters most — your
+                home and your family.
+              </p>
+            </ScrollReveal>
           </div>
 
           {/* Right — Contact form */}
-          <div className="w-full max-w-md lg:ml-auto">
-            <div className="rounded-xl border border-slate-700 bg-slate-900/80 p-6 backdrop-blur">
-              <h2 className="mb-1 text-lg font-bold text-white">
-                Get in Touch
-              </h2>
-              <p className="mb-4 text-sm text-slate-400">
-                Leave your info and we&apos;ll follow up.
-              </p>
-              <ContactForm variant="full" />
+          <ScrollReveal direction="right" delay={200}>
+            <div className="w-full max-w-md lg:ml-auto">
+              <div className="rounded-xl border border-slate-700 bg-slate-900/80 p-6 backdrop-blur">
+                <h2 className="mb-1 text-lg font-bold text-white">
+                  Get in Touch
+                </h2>
+                <p className="mb-4 text-sm text-slate-400">
+                  Leave your info and we&apos;ll follow up.
+                </p>
+                <ContactForm variant="full" />
+              </div>
             </div>
-          </div>
+          </ScrollReveal>
         </div>
       </section>
 
       {/* Offerings summary divider */}
       <SectionDivider
-        subtitle="Roofing services, storm restoration, gutters, and other contracting services — all from one trusted team."
+        heading="Our Services, Your Care."
+        subtitle="We work with closely with all of our clients to determine the best solutions for their roofing, storm restoration, gutters, and general contracting needs."
       />
 
-      {/* Primary Services */}
-      <section className="w-full bg-slate-900 px-6 py-16">
-        <div className="mx-auto flex max-w-5xl flex-col gap-10">
-          {primaryServices.map((svc, i) => (
-            <div key={svc.id} id={svc.id} className="scroll-mt-24">
-              <PrimaryServiceSection
-                title={svc.title}
-                subOfferings={svc.subOfferings}
-                reverse={i % 2 === 1}
-              />
-            </div>
-          ))}
-        </div>
-      </section>
+      {/* All Offerings — with background image */}
+      <section className="relative w-full overflow-hidden">
+        <Image
+          src="/images/roof.jpeg"
+          alt=""
+          fill
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-black/70" />
 
-      {/* Secondary Services */}
-      <section className="w-full bg-slate-900 px-6 pb-16">
-        <div className="mx-auto grid max-w-5xl gap-6 sm:grid-cols-3">
-          {secondaryServices.map((svc) => (
-            <div key={svc.id} id={svc.id} className="scroll-mt-24">
-              <ServiceCard
-                title={svc.title}
-                description={svc.description}
-              />
-            </div>
-          ))}
+        {/* Primary Services */}
+        <div className="relative z-10 px-6 py-16">
+          {/* Desktop */}
+          <div className="mx-auto hidden max-w-5xl flex-col gap-10 md:flex">
+            {primaryServices.map((svc, i) => (
+              <ScrollReveal
+                key={svc.id}
+                direction={i % 2 === 0 ? "left" : "right"}
+              >
+                <div id={svc.id} className="scroll-mt-24">
+                  <PrimaryServiceSection
+                    title={svc.title}
+                    subOfferings={svc.subOfferings}
+                    reverse={i % 2 === 1}
+                  />
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+          {/* Mobile accordion */}
+          <div className="mx-auto max-w-5xl md:hidden">
+            <ServiceAccordion services={primaryServices} defaultOpenIndex={0} />
+          </div>
+        </div>
+
+        {/* Secondary Services */}
+        <div className="relative z-10 px-6 pb-16">
+          {/* Desktop */}
+          <div className="mx-auto hidden max-w-5xl gap-6 sm:grid-cols-3 md:grid">
+            {secondaryServices.map((svc, i) => (
+              <ScrollReveal key={svc.id} delay={i * 100}>
+                <div id={svc.id} className="scroll-mt-24">
+                  <ServiceCard
+                    title={svc.title}
+                    description={svc.description}
+                  />
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+          {/* Mobile accordion */}
+          <div className="mx-auto max-w-5xl md:hidden">
+            <ServiceAccordion services={secondaryServices} defaultOpenIndex={0} />
+          </div>
         </div>
       </section>
 
@@ -215,14 +256,16 @@ export default function HomePage() {
 
       {/* Short divider */}
       <SectionDivider
-        heading="Ready to Get Started?"
-        cta="Request Your Free Estimate"
+        heading="Care, You Can Count On."
+        subtitle="View our Case Studies to see how we approach real projects from problem to solution."
+        cta="View Case Studies"
+        href="/portfolio"
       />
 
       {/* Company Info */}
-      <div id="about" className="scroll-mt-24">
-        <CompanyInfoBlock />
-      </div>
+        <div id="about" className="scroll-mt-24">
+          <CompanyInfoBlock />
+        </div>
     </>
   );
 }
