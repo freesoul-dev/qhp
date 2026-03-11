@@ -53,12 +53,12 @@ export default function AutoScrollGallery({
       </div>
 
       {/* Thumbnail strip */}
-      <div className="flex gap-2 overflow-visible ">
+      <div className="flex flex-wrap gap-2">
         {Array.from({ length: count }, (_, i) => (
           <button
             key={i}
             onClick={() => setActiveIndex(i)}
-            className={`flex aspect-square w-16 shrink-0 items-center justify-center rounded-md transition-all ${
+            className={`flex aspect-square w-12 items-center justify-center rounded-md transition-all sm:w-16 ${
               i === activeIndex
                 ? "bg-slate-600 ring-2 ring-amber-500"
                 : "bg-slate-700 opacity-50 hover:opacity-100"
