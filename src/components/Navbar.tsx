@@ -28,13 +28,20 @@ export default function Navbar() {
     if (pathname === "/") {
       requestAnimationFrame(() => {
         setTimeout(() => {
-          const el = document.getElementById(id);
+          const targets = document.querySelectorAll(`[id="${id}"]`);
+          let el: Element | null = null;
+          for (const t of targets) {
+            if ((t as HTMLElement).offsetParent !== null) {
+              el = t;
+              break;
+            }
+          }
+          if (!el) el = targets[0] ?? null;
           if (el) {
             const y = el.getBoundingClientRect().top + window.scrollY;
-            const offset = 96; // matches scroll-mt-24
-            window.scrollTo({ top: y - offset, behavior: "smooth" });
+            window.scrollTo({ top: y - 96, behavior: "smooth" });
           }
-        }, 200);
+        }, 300);
       });
     } else {
       router.push(`/#${id}`);

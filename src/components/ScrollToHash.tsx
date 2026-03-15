@@ -3,13 +3,19 @@
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 
-const SCROLL_OFFSET = 96; // matches scroll-mt-24 (6rem)
+function findVisibleElement(id: string): Element | null {
+  const targets = document.querySelectorAll(`[id="${id}"]`);
+  for (const t of targets) {
+    if ((t as HTMLElement).offsetParent !== null) return t;
+  }
+  return targets[0] ?? null;
+}
 
 function scrollToId(id: string) {
-  const el = document.getElementById(id);
+  const el = findVisibleElement(id);
   if (!el) return;
   const y = el.getBoundingClientRect().top + window.scrollY;
-  window.scrollTo({ top: y - SCROLL_OFFSET, behavior: "smooth" });
+  window.scrollTo({ top: y - 96, behavior: "smooth" });
 }
 
 export default function ScrollToHash() {
@@ -23,7 +29,7 @@ export default function ScrollToHash() {
 
     let timeoutId: ReturnType<typeof setTimeout> | undefined;
     const rafId = requestAnimationFrame(() => {
-      timeoutId = setTimeout(() => scrollToId(hash), 150);
+      timeoutId = setTimeout(() => scrollToId(hash), 300);
     });
     return () => {
       cancelAnimationFrame(rafId);
