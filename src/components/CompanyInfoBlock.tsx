@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import ContactForm from "./ContactForm";
 
 export default function CompanyInfoBlock() {
@@ -8,12 +9,25 @@ export default function CompanyInfoBlock() {
         {/* About */}
         <div>
           <h2 className="mb-4 text-2xl font-bold text-white">About Us</h2>
-          <div className="mb-6 aspect-video w-full rounded-lg bg-slate-700" />
+          {/* <div className="relative mb-6 aspect-square w-xs">
+            <Image src="/logo.png" alt="About Us" fill className="object-contain w-full h-full" />
+          </div> */}
           <p className="leading-relaxed text-slate-300">
-            Quality Home Protection LLC has been serving the Pittsburgh area
-            with reliable roofing, storm restoration, gutters, decks, and
-            general contracting services. We take pride in our craftsmanship
-            and commitment to protecting your home.
+            We are a Pittsburgh-based exterior home improvement company that believes every homeowner deserves top-quality 
+            roofing, siding, and gutters—without breaking the bank. While others cut corners or charge premium prices, 
+            we deliver expert craftsmanship at honest, modest rates. 
+            We know Pittsburgh's weather is tough on homes, which is why we use proven materials and skilled 
+            installation to protect your biggest investment for years to come.
+            <br />
+            <br />
+            We pride ourselves on
+            quality workmanship from local crews,
+            transparent pricing, with no surprises,
+            deep understanding of Pittsburgh's climate challenges,
+            and a commitment to doing it right the first time.
+            <br />
+            <br />
+            We are open <b className="text-amber-400">7 days a week</b>, <b className="text-amber-400">8am-6pm</b>. Give us a call at <a href="tel:412-641-0642" className="text-amber-400">+1 (412) 641-0642</a>, email us at <a href="mailto:admin@qualityhome.co" className="text-amber-400">admin@qualityhome.co</a>, or fill out the contact form to schedule a free consultation.
           </p>
         </div>
 

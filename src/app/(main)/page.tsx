@@ -12,6 +12,15 @@ const primaryServices = [
   {
     id: "roofing",
     title: "Roofing Services",
+    imagePaths: [
+      "/images/main/shingles.jpeg",
+      "/images/main/fascia.jpeg",
+      // "/images/main/gutterguards.jpeg",
+      "/images/main/chimney.jpeg",
+      "/images/main/flatroof.jpeg",
+      "/images/main/roofrepair.jpeg",
+      "/images/main/inspect.jpeg",
+    ],
     subOfferings: [
       {
         name: "Shingle Roofing",
@@ -19,9 +28,19 @@ const primaryServices = [
           "Our most popular option — we install and replace asphalt shingle roofs from leading manufacturers. Durable, affordable, and available in a wide range of styles to match your home.",
       },
       {
-        name: "Metal Roofing",
+        name: "Gutters",
         description:
-          "Long-lasting metal roofing systems that stand up to Pittsburgh's harshest weather. Energy-efficient, low-maintenance, and built to last 50+ years.",
+          "Custom-fitted seamless gutter systems designed to handle heavy rainfall. Precision-measured and installed for maximum water flow and durability.",
+      },
+      // {
+      //   name: "Gutter Guards",
+      //   description:
+      //     "Keep leaves and debris out with professionally installed gutter guards. Reduce maintenance and prevent clogs that lead to water damage.",
+      // },
+      {
+        name: "Chimney Repairs",
+        description:
+          "We repair and restore damaged chimney crowns, flashings, and bricks. Prevent leaks and structural deterioration with our restoration services.",
       },
       {
         name: "Flat Roofs",
@@ -43,6 +62,13 @@ const primaryServices = [
   {
     id: "storm-restoration",
     title: "Storm Restoration",
+    imagePaths: [
+      "/images/main/wind.jpeg",
+      "/images/main/hail.jpeg",
+      "/images/main/tarping.jpeg",
+      "/images/main/resto2.jpeg",
+      "/images/main/resto2.jpeg",
+    ],
     subOfferings: [
       {
         name: "Wind Damage",
@@ -53,11 +79,6 @@ const primaryServices = [
         name: "Hail Damage",
         description:
           "Hail can cause hidden damage that leads to leaks over time. Our trained inspectors identify all impact points and restore your roof to pre-storm condition.",
-      },
-      {
-        name: "Insurance Claims",
-        description:
-          "We work directly with your insurance company to streamline the claims process. Our documentation and expertise help ensure you receive fair coverage.",
       },
       {
         name: "Emergency Tarping",
@@ -74,21 +95,28 @@ const primaryServices = [
   {
     id: "box-gutters",
     title: "Box Gutters",
+    imagePaths: [
+      "/images/main/bridging.jpeg",
+      "/images/main/gutters.jpeg",
+      "/images/main/gutterrepair.jpeg",
+      "/images/main/downspout.jpeg",
+      "/images/main/boxgutters.jpeg",
+    ],
     subOfferings: [
+      {
+        name: "Box Gutter Bridging",
+        description:
+          "We bridge box gutters to the main house gutter system to ensure proper drainage and prevent water from pooling around your foundation. Bridging Box Gutters involves covering over the compromised box gutter system with new plywood or planking to create a new roof surface.",
+      },
       {
         name: "Gutter Installation",
         description:
-          "Custom-fitted seamless box gutter systems designed to handle heavy rainfall. Precision-measured and installed for maximum water flow and durability.",
+          "Custom fitted box gutter systems designed to handle heavy rainfall. Installed for maximum water flow and durability.",
       },
       {
         name: "Gutter Repair",
         description:
           "Leaking, sagging, or overflowing gutters? We repair and reseal box gutter systems to restore proper drainage and prevent foundation damage.",
-      },
-      {
-        name: "Gutter Guards",
-        description:
-          "Keep leaves and debris out with professionally installed gutter guards. Reduce maintenance and prevent clogs that lead to water damage.",
       },
       {
         name: "Downspouts",
@@ -110,18 +138,36 @@ const secondaryServices = [
     title: "Decks",
     description:
       "Custom deck construction and restoration to extend your living space. From pressure-treated wood to composite decking, built to last.",
+    imagePaths: [
+      "/images/main/decks/1.jpeg",
+      "/images/main/decks/2.jpeg",
+      "/images/main/decks/3.jpeg",
+      "/images/main/decks/4.jpeg",
+    ],
   },
   {
     id: "general-contracting",
     title: "General Contracting",
     description:
-      "Reliable contracting services for renovations, additions, siding, and structural repairs throughout the Pittsburgh area.",
+      "Reliable contracting services for renovations, additions, siding, and structural repairs throughout the Pittsburgh area. Including doors, windows, painting, and siding and more.",
+    imagePaths: [
+      "/images/main/general/1.JPG",
+      "/images/main/general/2.JPEG",
+      "/images/main/general/3.jpeg",
+      "/images/main/general/4.JPG",
+    ],
   },
   {
     id: "landscaping",
-    title: "Landscaping",
+    title: "Structural Landscaping",
     description:
       "Professional landscaping to complement your home's curb appeal — grading, retaining walls, drainage solutions, and more.",
+    imagePaths: [
+      "/images/main/scaping/3.jpeg",
+      "/images/main/scaping/4.jpeg",
+      "/images/main/scaping/1.jpeg",
+      "/images/main/scaping/2.jpeg",
+    ],
   },
 ];
 
@@ -159,12 +205,12 @@ export default function HomePage() {
             </ScrollReveal>
             <ScrollReveal delay={200}>
               <p className="mb-2 text-xl font-medium text-amber-400">
-                Built to Last. Backed by Trust.
+                Precision, Quality, Care.
               </p>
             </ScrollReveal>
             <ScrollReveal delay={300}>
               <p className="max-w-md text-slate-300">
-                Pittsburgh&apos;s trusted experts in roofing, storm restoration,
+                Pittsburgh&apos;s trusted craftsmen in roofing, storm restoration,
                 gutters, and home improvement. We protect what matters most — your
                 home and your family.
               </p>
@@ -191,7 +237,7 @@ export default function HomePage() {
       {/* Offerings summary divider */}
       <SectionDivider
         heading="Our Services, Your Care."
-        subtitle="We work with closely with all of our clients to determine the best solutions for their roofing, storm restoration, gutters, and general contracting needs."
+        subtitle="We work closely with all of our clients to determine the best solutions for their roofing, gutters, and general contracting needs."
       />
 
       {/* All Offerings — with background image */}
@@ -218,6 +264,7 @@ export default function HomePage() {
                     title={svc.title}
                     subOfferings={svc.subOfferings}
                     reverse={i % 2 === 1}
+                    imagePaths={svc.imagePaths}
                   />
                 </div>
               </ScrollReveal>
@@ -239,6 +286,7 @@ export default function HomePage() {
                   <ServiceCard
                     title={svc.title}
                     description={svc.description}
+                    imagePaths={svc.imagePaths}
                   />
                 </div>
               </ScrollReveal>

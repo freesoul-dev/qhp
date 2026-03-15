@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
+import ScrollToHash from "@/components/ScrollToHash";
 
 export default function MainLayout({
   children,
@@ -13,6 +14,7 @@ export default function MainLayout({
       <main>{children}</main>
       <Footer />
       <BackToTop />
+      <ScrollToHash />
     </>
   );
 }

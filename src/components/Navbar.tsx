@@ -24,12 +24,18 @@ export default function Navbar() {
   const scrollToSection = (id: string) => {
     setMenuOpen(false);
     setDropdownOpen(false);
-    
+
     if (pathname === "/") {
-      const el = document.getElementById(id);
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth" });
-      }
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          const el = document.getElementById(id);
+          if (el) {
+            const y = el.getBoundingClientRect().top + window.scrollY;
+            const offset = 96; // matches scroll-mt-24
+            window.scrollTo({ top: y - offset, behavior: "smooth" });
+          }
+        }, 200);
+      });
     } else {
       router.push(`/#${id}`);
     }

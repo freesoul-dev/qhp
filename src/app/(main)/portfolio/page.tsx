@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import SectionDivider from "@/components/SectionDivider";
 import CompanyInfoBlock from "@/components/CompanyInfoBlock";
 import CaseStudyCarousel from "@/components/CaseStudyCarousel";
@@ -11,33 +12,51 @@ export const metadata: Metadata = {
     "See how Quality Home Protection approaches real projects from problem to solution. Browse our case studies and past work gallery.",
 };
 
-const problemImages = ["Before — Overview", "Gutter detail", "Roof damage"];
-const approachImages = ["During — Tearoff", "Gutter bridging", "Fascia repair"];
-const resultImages = ["After — Finished", "Gutter closeup", "Final detail"];
+const problemImages = [
+  "/images/portfolio/problem/2.jpeg",
+  "/images/portfolio/problem/1.jpeg",
+  "/images/portfolio/problem/3.jpeg",
+];
+const approachImages = [
+  "/images/portfolio/approach/3.jpeg",
+  "/images/portfolio/approach/2.jpeg",
+  "/images/portfolio/approach/1.jpeg",
+];
+const resultImages = [
+  "/images/portfolio/result/2.jpeg",
+  "/images/portfolio/result/1.jpeg",
+  "/images/portfolio/result/3.jpeg",
+];
 
 export default function PortfolioPage() {
   return (
     <>
-      {/* Header */}
-      <section className="w-full bg-slate-900 px-6 pt-32 pb-16">
+      {/* Header + Case Study with shared background */}
+      <section className="relative w-full overflow-hidden bg-slate-900 px-6 pt-32 pb-20">
+        <Image
+          src="/background.png"
+          alt=""
+          fill
+          priority
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-black/70" />
+
         <div className="relative z-10 mx-auto max-w-5xl">
+          {/* Header */}
           <ScrollReveal>
             <h1 className="mb-4 text-4xl font-bold text-white">Portfolio</h1>
           </ScrollReveal>
           <ScrollReveal delay={100}>
-            <p className="max-w-2xl leading-relaxed text-slate-300">
+            <p className="mb-10 max-w-2xl leading-relaxed text-slate-300">
               Every project tells a story. We work closely with our clients to
               understand the problem, develop a plan, and deliver a lasting
               solution. Below is a look at how we approach our work — from
               initial assessment to finished result.
             </p>
           </ScrollReveal>
-        </div>
-      </section>
 
-      {/* Case Study — Porch Roof Modernization */}
-      <section className="w-full bg-slate-900 px-6 pb-20">
-        <div className="mx-auto max-w-5xl">
+          {/* Case Study — Porch Roof Modernization */}
           <ScrollReveal>
             <h2 className="mb-2 text-2xl font-bold text-white">
               Porch Roof Modernization with Box Gutter Bridging
@@ -63,7 +82,10 @@ export default function PortfolioPage() {
               </p>
             </ScrollReveal>
             <ScrollReveal direction="right" delay={150}>
-              <CaseStudyCarousel items={problemImages} />
+              <CaseStudyCarousel
+                imagePaths={problemImages}
+                alt="Porch roof condition before work"
+              />
             </ScrollReveal>
           </div>
 
@@ -87,20 +109,23 @@ export default function PortfolioPage() {
                 </li>
                 <li className="flex gap-2">
                   <span className="mt-1 block h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500" />
-                  Replaced rotted fascia boards and reinforced the structure
+                  Replaced rotted planking, soffit, and reinforced the structure
                 </li>
                 <li className="flex gap-2">
                   <span className="mt-1 block h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500" />
-                  Custom-fabricated box gutter bridging to tie into the main house drainage
+                  Bridged existing gutter system with plywood and installed new ice and water shield, and underlayment, and architectural shingles
                 </li>
                 <li className="flex gap-2">
                   <span className="mt-1 block h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500" />
-                  Installed new architectural shingles with ice &amp; water shield underlayment
+                  Installed new K style gutters and downspouts to tie into main house drainage
                 </li>
               </ul>
             </ScrollReveal>
             <ScrollReveal direction="left" delay={150} className="md:order-1">
-              <CaseStudyCarousel items={approachImages} />
+              <CaseStudyCarousel
+                imagePaths={approachImages}
+                alt="Porch roof modernization in progress"
+              />
             </ScrollReveal>
           </div>
 
@@ -120,7 +145,10 @@ export default function PortfolioPage() {
               </p>
             </ScrollReveal>
             <ScrollReveal direction="right" delay={150}>
-              <CaseStudyCarousel items={resultImages} />
+              <CaseStudyCarousel
+                imagePaths={resultImages}
+                alt="Finished porch roof and box gutter bridging"
+              />
             </ScrollReveal>
           </div>
         </div>

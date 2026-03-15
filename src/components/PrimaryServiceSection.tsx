@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 
 interface SubOffering {
@@ -11,15 +12,22 @@ interface PrimaryServiceSectionProps {
   title: string;
   subOfferings: SubOffering[];
   reverse?: boolean;
+  imagePaths?: string[];
 }
 
 export default function PrimaryServiceSection({
   title,
   subOfferings,
   reverse = false,
+  imagePaths,
 }: PrimaryServiceSectionProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const active = subOfferings[activeIndex];
+  const images = imagePaths ?? [];
+  const hasImages = images.length > 0;
+  const mainImage = hasImages
+    ? images[activeIndex % images.length]
+    : null;
 
   return (
     <div className="overflow-hidden rounded-lg border border-slate-700 bg-slate-900/80 backdrop-blur">
@@ -55,23 +63,45 @@ export default function PrimaryServiceSection({
 
         {/* Image gallery side */}
         <div className={`flex flex-col gap-3 ${reverse ? "md:order-1" : ""}`}>
-          <div className="flex aspect-[4/3] items-center justify-center rounded-md bg-slate-700">
-            <span className="text-xs text-slate-500">
-              {active.name} — Image
-            </span>
+          <div className="relative aspect-[4/3] overflow-hidden rounded-md bg-slate-700">
+            {mainImage ? (
+              <Image
+                src={mainImage}
+                alt={active.name}
+                fill
+                className="object-cover"
+              />
+            ) : (
+              <div className="flex h-full w-full items-center justify-center">
+                <span className="text-xs text-slate-500">
+                  {active.name} — Image
+                </span>
+              </div>
+            )}
           </div>
           <div className="grid grid-cols-3 gap-2">
-            {subOfferings.slice(0, 3).map((sub, i) => (
+            {(hasImages ? images : subOfferings.map((s) => s.name)).slice(0, 3).map((item, i) => (
               <button
-                key={sub.name}
+                key={typeof item === "string" ? item : (item as string)}
                 onClick={() => setActiveIndex(i)}
-                className={`aspect-[4/3] rounded-md transition-opacity ${
+                className={`relative aspect-[4/3] overflow-hidden rounded-md transition-all ${
                   i === activeIndex
-                    ? "bg-slate-600 ring-2 ring-amber-500"
-                    : "bg-slate-700 opacity-60 hover:opacity-100"
+                    ? "ring-2 ring-amber-500"
+                    : "opacity-70 hover:opacity-100"
                 }`}
               >
-                <span className="text-[10px] text-slate-500">{sub.name}</span>
+                {hasImages ? (
+                  <Image
+                    src={images[i]}
+                    alt={`${title} ${i + 1}`}
+                    fill
+                    className="object-cover"
+                  />
+                ) : (
+                  <span className="text-[10px] text-slate-500">
+                    {subOfferings[i]?.name}
+                  </span>
+                )}
               </button>
             ))}
           </div>

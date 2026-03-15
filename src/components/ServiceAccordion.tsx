@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import ImageCarousel from "./ImageCarousel";
 
@@ -13,11 +14,56 @@ interface ServiceItem {
   title: string;
   subOfferings?: SubOffering[];
   description?: string;
+  imagePaths?: string[];
 }
 
 interface ServiceAccordionProps {
   services: ServiceItem[];
   defaultOpenIndex?: number;
+}
+
+function AccordionImageCarousel({
+  imagePaths,
+  alt,
+}: {
+  imagePaths: string[];
+  alt: string;
+}) {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const current = imagePaths[activeIndex % imagePaths.length];
+
+  return (
+    <div className="relative aspect-[4/3] overflow-hidden rounded-md bg-slate-700">
+      <Image
+        src={current}
+        alt={alt}
+        fill
+        className="object-cover"
+      />
+      {imagePaths.length > 1 && (
+        <>
+          <button
+            type="button"
+            onClick={() =>
+              setActiveIndex((i) => (i - 1 + imagePaths.length) % imagePaths.length)
+            }
+            className="absolute left-2 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-black/40 text-white"
+            aria-label="Previous"
+          >
+            &#8249;
+          </button>
+          <button
+            type="button"
+            onClick={() => setActiveIndex((i) => (i + 1) % imagePaths.length)}
+            className="absolute right-2 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-black/40 text-white"
+            aria-label="Next"
+          >
+            &#8250;
+          </button>
+        </>
+      )}
+    </div>
+  );
 }
 
 function SubOfferingAccordion({ subOfferings }: { subOfferings: SubOffering[] }) {
@@ -121,14 +167,28 @@ export default function ServiceAccordion({
                   {hasSubs ? (
                     <div>
                       <div className="mb-4">
-                        <ImageCarousel count={4} label={service.title} />
+                        {service.imagePaths && service.imagePaths.length > 0 ? (
+                          <AccordionImageCarousel
+                            imagePaths={service.imagePaths}
+                            alt={service.title}
+                          />
+                        ) : (
+                          <ImageCarousel count={4} label={service.title} />
+                        )}
                       </div>
                       <SubOfferingAccordion subOfferings={service.subOfferings!} />
                     </div>
                   ) : (
                     <div>
                       <div className="mb-3">
-                        <ImageCarousel count={4} label={service.title} />
+                        {service.imagePaths && service.imagePaths.length > 0 ? (
+                          <AccordionImageCarousel
+                            imagePaths={service.imagePaths}
+                            alt={service.title}
+                          />
+                        ) : (
+                          <ImageCarousel count={4} label={service.title} />
+                        )}
                       </div>
                       <p className="text-sm leading-relaxed text-slate-300">
                         {service.description}
