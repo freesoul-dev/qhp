@@ -4,14 +4,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, useRef, useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
+import { scrollToSectionById } from "./ScrollToHash";
 
 const offerings = [
-  { label: "Roofing Services", anchor: "/#roofing", id: "roofing" },
-  { label: "Storm Restoration", anchor: "/#storm-restoration", id: "storm-restoration" },
-  { label: "Box Gutters", anchor: "/#box-gutters", id: "box-gutters" },
-  { label: "Decks", anchor: "/#decks", id: "decks" },
-  { label: "General Contracting", anchor: "/#general-contracting", id: "general-contracting" },
-  { label: "Landscaping", anchor: "/#landscaping", id: "landscaping" },
+  { label: "Roofing Services", id: "roofing" },
+  { label: "Storm Restoration", id: "storm-restoration" },
+  { label: "Box Gutters", id: "box-gutters" },
+  { label: "Decks", id: "decks" },
+  { label: "General Contracting", id: "general-contracting" },
+  { label: "Landscaping", id: "landscaping" },
 ];
 
 export default function Navbar() {
@@ -26,23 +27,8 @@ export default function Navbar() {
     setDropdownOpen(false);
 
     if (pathname === "/") {
-      requestAnimationFrame(() => {
-        setTimeout(() => {
-          const targets = document.querySelectorAll(`[id="${id}"]`);
-          let el: Element | null = null;
-          for (const t of targets) {
-            if ((t as HTMLElement).offsetParent !== null) {
-              el = t;
-              break;
-            }
-          }
-          if (!el) el = targets[0] ?? null;
-          if (el) {
-            const y = el.getBoundingClientRect().top + window.scrollY;
-            window.scrollTo({ top: y - 96, behavior: "smooth" });
-          }
-        }, 300);
-      });
+      // Small delay so the mobile menu unmounts before we measure scroll position
+      setTimeout(() => scrollToSectionById(id), 100);
     } else {
       router.push(`/#${id}`);
     }

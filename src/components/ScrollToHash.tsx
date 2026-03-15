@@ -3,19 +3,26 @@
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 
-function findVisibleElement(id: string): Element | null {
-  const targets = document.querySelectorAll(`[id="${id}"]`);
-  for (const t of targets) {
-    if ((t as HTMLElement).offsetParent !== null) return t;
-  }
-  return targets[0] ?? null;
-}
-
-function scrollToId(id: string) {
-  const el = findVisibleElement(id);
-  if (!el) return;
-  const y = el.getBoundingClientRect().top + window.scrollY;
-  window.scrollTo({ top: y - 96, behavior: "smooth" });
+export function scrollToSectionById(id: string) {
+  window.dispatchEvent(
+    new CustomEvent("open-accordion-section", { detail: { id } }),
+  );
+  // 400ms lets the accordion expand (300ms transition) before we measure position
+  setTimeout(() => {
+    const targets = document.querySelectorAll<HTMLElement>(`[id="${id}"]`);
+    let el: HTMLElement | null = null;
+    for (const t of targets) {
+      if (t.offsetParent !== null) {
+        el = t;
+        break;
+      }
+    }
+    if (!el && targets.length) el = targets[0];
+    if (el) {
+      const top = el.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({ top: top - 20, behavior: "smooth" });
+    }
+  }, 400);
 }
 
 export default function ScrollToHash() {
@@ -23,18 +30,13 @@ export default function ScrollToHash() {
 
   useEffect(() => {
     if (pathname !== "/") return;
-
-    const hash = typeof window !== "undefined" ? window.location.hash.slice(1) : "";
+    const hash = window.location.hash.slice(1);
     if (!hash) return;
 
-    let timeoutId: ReturnType<typeof setTimeout> | undefined;
-    const rafId = requestAnimationFrame(() => {
-      timeoutId = setTimeout(() => scrollToId(hash), 300);
+    const id = requestAnimationFrame(() => {
+      scrollToSectionById(hash);
     });
-    return () => {
-      cancelAnimationFrame(rafId);
-      if (timeoutId !== undefined) clearTimeout(timeoutId);
-    };
+    return () => cancelAnimationFrame(id);
   }, [pathname]);
 
   return null;

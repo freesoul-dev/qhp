@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ImageCarousel from "./ImageCarousel";
 
 interface SubOffering {
@@ -118,6 +118,17 @@ export default function ServiceAccordion({
   defaultOpenIndex = 0,
 }: ServiceAccordionProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(defaultOpenIndex);
+
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const id = (e as CustomEvent<{ id: string }>).detail?.id;
+      if (!id) return;
+      const idx = services.findIndex((s) => s.id === id);
+      if (idx >= 0) setOpenIndex(idx);
+    };
+    window.addEventListener("open-accordion-section", handler);
+    return () => window.removeEventListener("open-accordion-section", handler);
+  }, [services]);
 
   const toggle = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
