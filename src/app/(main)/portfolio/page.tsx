@@ -155,7 +155,7 @@ export default function PortfolioPage() {
       </section>
 
       {/* Past Work Gallery */}
-      <section className="w-full bg-slate-800 px-6 py-16">
+      {/* <section className="w-full bg-slate-800 px-6 py-16">
         <div className="mx-auto max-w-5xl">
           <ScrollReveal>
             <h2 className="mb-2 text-2xl font-bold text-white">Past Work</h2>
@@ -168,11 +168,11 @@ export default function PortfolioPage() {
             <AutoScrollGallery count={12} />
           </ScrollReveal>
         </div>
-      </section>
+      </section> */}
 
       <SectionDivider
-        heading="Ready to Get Started?"
-        cta="Request Your Free Estimate"
+        heading="Get in touch"
+        cta="Schedule and Assessment"
       />
 
       <CompanyInfoBlock />
